@@ -1,2 +1,4 @@
 *.ipynb
 .ipunb_checkpoints
+/dataset/train/*
+/dataset/test/*
