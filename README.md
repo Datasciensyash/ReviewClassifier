@@ -7,7 +7,7 @@ Model and api to classifiy film reviews on 10 point scale.
 ## Dataset
 
 #### Dataset source
-For training and evaluating model was chosen [Large Movie Review Dataset](https://ai.stanford.edu/~amaas/data/sentiment/), gathered at [IMDB](https://www.imdb.com/). Dataset contains `50,000` user film reviews with positive or negative label. `25,000` in the test and training part.
+For training and evaluating model was chosen [Large Movie Review Dataset](https://ai.stanford.edu/~amaas/data/sentiment/), gathered at [IMDB](https://www.imdb.com/). Dataset contains `50,000` user film reviews with positive or negative label. `25,000` in the test and training part. All two classes are completely balanced, `12,500` per positive and negative class.
 
 Here a small example of dataset samples:
 
@@ -24,3 +24,31 @@ Here a small example of dataset samples:
 
 #### Data preparation
 Dataset was originally stored in `50,000` `.txt` files, but during the data preparation process was created pandas `DataFrame`'s with train and test samples. Also, i have performed the deletion of not-unique samples from dataset, which reduced size of train and test `24,904` and `24,801` respectively.
+
+---
+
+## Model and training
+
+#### Model
+
+Model was composed of two components:
+- `TF-IDF vectorizer` for text vectorization
+- `Logistic Regression` for vector classification
+
+#### Training Process
+
+**Baseline** 
+
+Baseline was to simple combine `sklearn`'s `TfidfVectorizer` and `sklearn`'s `LogisticRegression` with following hyperparameters:
+
+```yaml
+Vectorizer:
+  - min_df: 1
+  - max_df: 0.9
+LogisticRegression:
+  - solver: lbfgs
+  - max_iter: 100
+```
+That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline hasn't used unsupervised data to train, which in theory can get better metrics value. The table below shows another training strategies with it metrics:
+
+
