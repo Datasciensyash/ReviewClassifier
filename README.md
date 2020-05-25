@@ -51,6 +51,6 @@ That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline
 
 For hyperparameter optimization was used W&B Sweeps platform. All information, logs and charts public avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash).
 
-[Hyperparameters optimization](images/wandb.png)
+![Hyperparameters optimization](images/wandb.png)
 
 
