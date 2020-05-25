@@ -37,8 +37,6 @@ Model was composed of two components:
 
 #### Training Process
 
-**Baseline** 
-
 Baseline was to simple combine `sklearn`'s `TfidfVectorizer` and `sklearn`'s `LogisticRegression` with following hyperparameters:
 
 ```yaml
