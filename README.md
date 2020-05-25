@@ -23,7 +23,7 @@ Here a small example of dataset samples:
 
 
 #### Data preparation
-Dataset was originally stored in `50,000` `.txt` files, but during the data preparation process was created pandas `DataFrame`'s with train and test samples. Also, i have performed the deletion of not-unique samples from dataset, which reduced size of train and test `24,904` and `24,801` respectively.
+Dataset was originally stored in `50,000` `.txt` files, but during the data preparation process was created pandas `DataFrame`'s with train and test samples. Also, i have performed the deletion of not-unique samples from dataset, which reduced size of train and test sets to `24,904` and `24,801` respectively.
 
 ---
 
@@ -51,6 +51,6 @@ That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline
 
 For hyperparameter optimization was used W&B Sweeps platform. All information, logs and charts public avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash).
 
-[Hyperparameters optimization](images/wandb.png)
+![Hyperparameters optimization](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/wandb.png)
 
 
