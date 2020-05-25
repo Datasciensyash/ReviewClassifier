@@ -1,0 +1,36 @@
+program: train.py
+method: random
+metric:
+  name: val_accuracy
+  goal: maximize
+parameters:
+  vectorizer_fit_unsup:
+    distribution: categorical
+    values:
+      - True
+      - False
+  pseudolabel_unsup:
+    distribution: categorical
+    values:
+      - True
+      - False     
+  max_df:
+    distribution: uniform
+    min: 0.7
+    max: 1.0
+  min_df:
+    distribution: int_uniform
+    min: 0
+    max: 12
+  solver:
+    distribution: categorical
+    values:
+      - lbfgs
+      - newton-cg
+      - liblinear
+      - sag
+      - saga
+  max_iter:
+    distribution: int_uniform
+    min: 20
+    max: 200

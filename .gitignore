@@ -2,3 +2,5 @@
 .ipunb_checkpoints
 /dataset/train/*
 /dataset/test/*
+/wandb/*
+/api/*
