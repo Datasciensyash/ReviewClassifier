@@ -53,4 +53,7 @@ For hyperparameter optimization was used W&B Sweeps platform. All **results**, *
 
 ![Hyperparameters optimization](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/wandb.png)
 
+---
+
+## Rating model
 
