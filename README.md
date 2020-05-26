@@ -90,5 +90,6 @@ requests.get(url, {'input': review})
 
 >> {"Predictions": [{"Class": 0, "Description": "Negative", "Rating": 1.34, "Rating_rounded": 1}]}
 ```
+---
 
-## 
+## Results
