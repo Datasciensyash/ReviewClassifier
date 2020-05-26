@@ -59,6 +59,11 @@ For hyperparameter optimization was used W&B Sweeps platform. All **results**, *
 
 In this project the main goal was not to classify `positive` and `negative` classes but to **map** classification **predictions to film rating**. A naive way to do that is multiply the probability of `positive` class by `10`. But it doesn't work correctly because of the distribution of predictions. Let's get closer look on it.
 
+Histogram below represents distribution of film ratings at imdb (according to [this dataset](https://raw.githubusercontent.com/miptgirl/kinopoisk_data/master/kp_all_movies.csv)). Our dataset consists of `positive` and `negative` class, or only reviews with rating `> 7` and `< 4` accordingly. `Neutral` class is not represented in dataset.
+
 ![D-1](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-1.png)
+
+When we mapping our `positive`-class probability to the rating we want to create look-alike distribution in production. And re-scaling our probability to 1-10 range is not the way to get it. Below is histogram with distribution of model predictions. Colors represents 
+
 ![D-2](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-2.png)
 ![D-3](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-3.png)
