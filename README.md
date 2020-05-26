@@ -57,5 +57,8 @@ For hyperparameter optimization was used W&B Sweeps platform. All **results**, *
 
 ## Rating model
 
-In this project the main goal was not to classify `positive` and `negative` classes but to **map** classification **predictions to film rating**. A naive way to do that is multiply the probability of `positive` class by `10`. But it doesn't work correctly because of the distribution of predictions.
+In this project the main goal was not to classify `positive` and `negative` classes but to **map** classification **predictions to film rating**. A naive way to do that is multiply the probability of `positive` class by `10`. But it doesn't work correctly because of the distribution of predictions. Let's get closer look on it.
 
+![D-1](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-1.png)
+![D-2](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-2.png)
+![D-3](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-3.png)
