@@ -63,7 +63,17 @@ Histogram below represents distribution of film ratings at imdb (according to [t
 
 ![D-1](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-1.png)
 
-When we mapping our `positive`-class probability to the rating we want to create look-alike distribution in production. And re-scaling our probability to 1-10 range is not the way to get it. Below is histogram with distribution of model predictions. Colors represents 
+When we mapping our `positive`-class probability to the rating we want to create look-alike distribution in production. And re-scaling our probability to 1-10 range is not the way to get it. Below is histogram with distribution of model predictions. Colors matching the distribution of film ratings to the distribution of predictions.
 
 ![D-2](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-2.png)
+
+After rescaling this distribution in parts we get distribution showed below.
+
 ![D-3](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-3.png)
+
+Last we need is to create map from this distribution to initial film rating distribution from imdb, e.g. by modified  `Inverse Transform Sampling` method (Implementation is stored here: `./modules/dist_map.py`), using small amout of bins for smoother look.
+
+![Map](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distmap.png)
+
+
+
