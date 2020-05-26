@@ -77,3 +77,16 @@ Last we need is to create map from this distribution to initial film rating dist
 
 ---
 
+## Deploy and API
+
+Model has been deployed on Django at heroku. For closer look you can see `./api` folder. 
+
+Example of usability:
+```python
+import requests
+url = 'https://filmreviewclassifier.herokuapp.com/model_handler/'
+review = 'This film is so boring, i just fall asleep'
+requests.get(url, {'input': review})
+
+>> {"Predictions": [{"Class": 0, "Description": "Negative", "Rating": 1.34, "Rating_rounded": 1}]}
+```
