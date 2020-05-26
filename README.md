@@ -73,7 +73,7 @@ After rescaling this distribution in parts we get distribution showed below.
 
 Last we need is to create map from this distribution to initial film rating distribution from imdb, e.g. by modified  `Inverse Transform Sampling` method (Implementation is stored here: `./modules/dist_map.py`), using small amout of bins for smoother look.
 
-![Map](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distmap.png)
+![Map](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/map.png)
 
 
 
