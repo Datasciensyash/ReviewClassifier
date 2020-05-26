@@ -51,7 +51,7 @@ That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline
 
 For hyperparameter optimization was used W&B Sweeps platform. All **results**, **logs** and **charts** public avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash). Also, this information is stored at `Hyperoptinfo.csv` file.
 
-![Hyperparameters optimization](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/wandb.png)
+![Hyperparameters optimization](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/wandb.png)
 
 ---
 
@@ -61,19 +61,19 @@ In this project the main goal was not to classify `positive` and `negative` clas
 
 Histogram below represents distribution of film ratings at imdb (according to [this dataset](https://raw.githubusercontent.com/miptgirl/kinopoisk_data/master/kp_all_movies.csv)). Our dataset consists of `positive` and `negative` class, or only reviews with rating `> 7` and `< 4` accordingly. `Neutral` class is not represented in dataset.
 
-![D-1](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-1.png)
+![D-1](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/distribution-1.png)
 
 When we mapping our `positive`-class probability to the rating we want to create look-alike distribution in production. And re-scaling our probability to 1-10 range is not the way to get it. Below is histogram with distribution of model predictions. Colors matching the distribution of film ratings to the distribution of predictions.
 
-![D-2](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-2.png)
+![D-2](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/distribution-2.png)
 
 After rescaling this distribution in parts we get distribution showed below.
 
-![D-3](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/distribution-3.png)
+![D-3](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/distribution-3.png)
 
 Last we need is to create map from this distribution to initial film rating distribution from imdb, e.g. by modified  `Inverse Transform Sampling` method (Implementation is stored here: `./modules/dist_map.py`), using small amout of bins for smoother look.
 
-![Map](https://github.com/Datasciensyash/ReviewClassifier/blob/master/images/map.png)
+![Map](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/map.png)
 
 
 
