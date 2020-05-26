@@ -57,3 +57,5 @@ For hyperparameter optimization was used W&B Sweeps platform. All **results**, *
 
 ## Rating model
 
+In this project the main goal was not to classify `positive` and `negative` classes but to **map** classification **predictions to film rating**. A naive way to do that is multiply the probability of `positive` class by `10`. But it doesn't work correctly because of the distribution of predictions.
+
