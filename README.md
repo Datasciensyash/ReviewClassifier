@@ -71,7 +71,7 @@ After rescaling this distribution in parts we get distribution showed below.
 
 ![D-3](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/distribution-3.png)
 
-Last we need is to create map from this distribution to initial film rating distribution from imdb, e.g. by modified  `Inverse Transform Sampling` method (Implementation is stored here: `./modules/dist_map.py`), using small amout of bins for smoother look. `x` here represents predictions axis, and `y` - rating axis. As we can see, that is exactly what we looking for: very low probability to get too high and too low ratings (like in real distribution!)
+Last we need is to create map from this distribution to initial film rating distribution from imdb, e.g. by modified  `Inverse Transform Sampling` method (Implementation is stored here: `./modules/dist_map.py`), using small amout of bins for smoother look. `x` here represents predictions axis (multiplied by 10), and `y` - rating axis. As we can see, that is exactly what we looking for: very low probability to get too high and too low ratings (like in real distribution!)
 
 ![Map](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/map.png)
 
