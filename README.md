@@ -90,7 +90,7 @@ For testing rating model i have scraped `700` reviews from imdb with their score
 
 ## Deploy and API
 
-Model has been [deployed](https://filmreviewclassifier.herokuapp.com/model_handler/?input=None) on Django at heroku. For closer look you can see `./api` folder. 
+Model has been [deployed](https://filmreviewclassifier.herokuapp.com/model_handler/?input=None) on Django at heroku. For closer look you can see `./api/` folder. 
 
 Example of use:
 ```python
@@ -111,5 +111,3 @@ Fields in response:
 - `Rating_rounded`: `Rating`, but rounded.
 
 ---
-
-## Results
