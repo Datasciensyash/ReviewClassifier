@@ -1,1 +1,1 @@
-web: gunicorn ml_api.wsgi --log-file log.txt
+web: gunicorn ml_api.wsgi
