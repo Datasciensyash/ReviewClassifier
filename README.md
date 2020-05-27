@@ -83,7 +83,7 @@ For testing rating model i have scraped `700` reviews from imdb with their score
 
 |Method                       |MSE|
 |-----------------------------|---|
-|Rescaling (multiplying by 10)| 6.603|
+|Rescaling (multiplying by 10)| 5.443|
 |Mapping                      | 4.423|
 
 ![Rating test](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/dist_compare.png)
