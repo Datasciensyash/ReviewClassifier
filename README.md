@@ -79,7 +79,7 @@ Last we need is to create map from this distribution to initial film rating dist
 
 ## Testing Rating model
 
-For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `review_ratings.csv`. Plot below shows predictions mapped to rating in two ways: simple multiplying by 10, or `rescaling` and using function described before, or `mapping`. Red line shows ground truth labels.
+For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `review_ratings.csv`. Plot below shows predictions mapped to rating in two ways: simple multiplying by 10, or `rescaling` and using function described before, or `mapping`. Red line shows ground truth labels. As you can see, simple rescaling works worse.
 
 |Method                       |MSE|
 |-----------------------------|---|
