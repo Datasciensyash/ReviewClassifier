@@ -91,6 +91,8 @@ You can see dataset gathering and evaluating this metrics in `./Movie Rating Tes
 
 ![Rating test](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/dist_compare.png)
 
+As you can see, these **data** are well balanced, which does **not correspond to real data**, therefore, the `MSE` of the mapping model is overvalued, as well as rescaling method underestimated.
+
 ## Deploy and API
 
 Model has been [deployed](https://filmreviewclassifier.herokuapp.com/model_handler/?input=None) on Django at heroku. For closer look you can see `./api/` folder. 
@@ -102,7 +104,7 @@ url = 'https://filmreviewclassifier.herokuapp.com/model_handler/'
 review = 'This film is so boring, i just fall asleep'
 requests.get(url, {'input': review})
 
->> {"Predictions": {"Class": -1, "Description": "Negative", "Rating": 1.3, "Rating_rounded": 1}}
+>> {"Predictions": [{"Class": -1, "Description": "Negative", "Rating": 1.3, "Rating_rounded": 1}]}
 ```
 Fields in response:
 - `Class`: Class of review.
