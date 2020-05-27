@@ -1,6 +1,4 @@
-*.ipynb
-.ipunb_checkpoints
-/dataset/train/*
-/dataset/test/*
+.ipynb_checkpoints
+/dataset/train/
+/dataset/test/
 /wandb/*
-/api/*
