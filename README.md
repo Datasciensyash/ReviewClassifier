@@ -104,7 +104,7 @@ requests.get(url, {'input': review})
 
 >> {"Predictions": [{"Class": -1, "Description": "Negative", "Rating": 1.3, "Rating_rounded": 1}]}
 ```
-Fields in response['Predictions']:
+Fields in response:
 - `Class`: Class of review.
   - `-1` is negative.
   - `0` is neutral.
