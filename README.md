@@ -102,9 +102,9 @@ url = 'https://filmreviewclassifier.herokuapp.com/model_handler/'
 review = 'This film is so boring, i just fall asleep'
 requests.get(url, {'input': review})
 
->> {"Predictions": {"Class": -1, "Description": "Negative", "Rating": 1.3, "Rating_rounded": 1}}
+>> {"Predictions": [{"Class": -1, "Description": "Negative", "Rating": 1.3, "Rating_rounded": 1}]}
 ```
-Fields in response:
+Fields in response['Predictions']:
 - `Class`: Class of review.
   - `-1` is negative.
   - `0` is neutral.
