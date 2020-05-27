@@ -77,6 +77,10 @@ Last we need is to create map from this distribution to initial film rating dist
 
 ---
 
+## Testing Rating model
+
+For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `review_ratings.csv`. 
+
 ## Deploy and API
 
 Model has been [deployed](https://filmreviewclassifier.herokuapp.com/model_handler/?input=None) on Django at heroku. For closer look you can see `./api` folder. 
