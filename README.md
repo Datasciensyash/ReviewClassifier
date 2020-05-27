@@ -81,6 +81,8 @@ Last we need is to create map from this distribution to initial film rating dist
 
 For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `review_ratings.csv`. Plot below shows predictions mapped to rating in two ways: simple multiplying by `9` and adding `1`, or `rescaling` and using function described before, or `mapping`. Red line shows ground truth labels. As you can see, simple rescaling works worse.
 
+You can see dataset gathering and evaluating this metrics in `./Movie Rating Test.ipynb`. 
+
 |Method   |MSE_1 |MSE_2|MSE_3|MSE_4|MSE_5|MSE_6|MSE_7|MSE_8|MSE_9|MSE_10|Mean  |
 |---------|------|-----|-----|-----|-----|-----|-----|-----|-----|------|------|
 |Rescaling|4.771 |5.009|5.871|6.201|9.084|7.536|6.369|3.731|1.931|4.072 | 5.443|
