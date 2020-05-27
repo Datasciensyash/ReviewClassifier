@@ -4,31 +4,22 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 
 class call_model(APIView):
-    def get(self, request):
-        if request.method == 'GET':
-            #Get input data
-            input_data = request.GET.get('input')
+	def get(self, request):
+		if request.method == 'GET':
+			#Get input data
+			input_data = request.GET.get('input')
 
-            print(f'Input data {input_data}')
+			#Get predictions
+			predictions = ModelHandlerConfig.model(input_data)
 
-            print('Trying to get predictions...')
+			#Build response
+			prediction = {
+				'Class': int(predictions[0][0]),
+				'Description': {0:'Neutral', 1:'Positive', -1:'Negative'}[int(predictions[0][0])],
+				'Rating': round(predictions[0][1], 1),
+				'Rating_rounded': int(round(predictions[0][1]))
+				}
 
-            #Get predictions
-            predictions = ModelHandlerConfig.model(input_data)
+			response = {'Predictions': [prediction]}
 
-            print(f'Predictions: {predictions} ')
-
-            #Build response
-            predictions_list = []
-            for prediction in predictions:
-            	predictions_list.append({
-            		'Class': int(prediction[0]),
-            		'Description': {0:'Neutral', 1:'Positive', -1:'Negative'}[int(prediction[0])],
-            		'Rating': round(prediction[1], 1),
-            		'Rating_rounded': int(round(prediction[1]))
-            		})
-            response = {'Predictions': predictions_list}
-
-            print(f'Response: {response}')
-
-            return JsonResponse(response)
+			return JsonResponse(response)

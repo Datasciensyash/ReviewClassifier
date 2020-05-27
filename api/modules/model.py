@@ -47,7 +47,7 @@ class ModelHandler():
 		positive_proba = self.model.predict_proba(features)[:, 1]
 
 		#Получение оценки от 1 до 10:
-		rating = self.ratinger(positive_proba)
+		rating = self.ratinger(positive_proba) * 10
 
 		#Преобразование рейтинга в класс
 		if rating <= 4:
