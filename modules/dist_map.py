@@ -66,7 +66,7 @@ class DistributionMap():
 		'bin_edges_X': self.bin_edges_X,
 		'bin_edges_Y': self.bin_edges_Y,
 		'cum_values_X': self.cum_values_X,
-		'cum_values_Y': self.cum_values_X,
+		'cum_values_Y': self.cum_values_Y,
 		}
 
 		return state 
