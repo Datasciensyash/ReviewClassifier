@@ -2,3 +2,4 @@
 /dataset/train/
 /dataset/test/
 /wandb/*
+/notebooks/Data analysis.ipynb
