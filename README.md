@@ -49,7 +49,7 @@ LogisticRegression:
 ```
 That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline hasn't used unsupervised data to train, which in theory can get better metrics value. Also, baseline hasn't used strategy of re-training on pseudo-labeled data.
 
-For hyperparameter optimization was used W&B Sweeps platform. All **results**, **logs** and **charts** public avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash). Also, this information is stored at `Hyperoptinfo.csv` file. Training with best hyperparameters gain `0.89` accuracy and `0.28` LogLoss on Test data.
+For hyperparameter optimization was used W&B Sweeps platform. All **results**, **logs** and **charts** public avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash). Also, this information is stored at `./csv/Hyperoptinfo.csv` file. Training with best hyperparameters gain `0.89` accuracy and `0.28` LogLoss on Test data.
 
 ![Hyperparameters optimization](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/wandb.png)
 
@@ -79,7 +79,7 @@ Last we need is to create map from this distribution to initial film rating dist
 
 ## Testing Rating model
 
-For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `review_ratings.csv`. Plot below shows predictions mapped to rating in two ways: simple multiplying by `9` and adding `1`, or `rescaling` and using function described before, or `mapping`. Red line shows ground truth labels. As you can see, simple rescaling works worse.
+For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `./csv/review_ratings.csv`. Plot below shows predictions mapped to rating in two ways: simple multiplying by `9` and adding `1`, or `rescaling` and using function described before, or `mapping`. Red line shows ground truth labels. As you can see, simple rescaling works worse.
 
 You can see dataset gathering and evaluating this metrics in `./Movie Rating Test.ipynb`. 
 
