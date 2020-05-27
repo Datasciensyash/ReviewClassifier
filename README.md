@@ -57,7 +57,7 @@ For hyperparameter optimization was used W&B Sweeps platform. All **results**, *
 
 ## Rating model
 
-In this project the main goal was not to classify `positive` and `negative` classes but to **map** classification **predictions to film rating**. A naive way to do that is multiply the probability of `positive` class by `10`. But it doesn't work correctly because of the distribution of predictions. Let's get closer look on it.
+In this project the main goal was not to classify `positive` and `negative` classes but to **map** classification **predictions to film rating**. A naive way to do that is multiply the probability of `positive` class by `9` and add `1`. But it doesn't work correctly because of the distribution of predictions. Let's get closer look on it.
 
 Histogram below represents distribution of film ratings at imdb (according to [this dataset](https://raw.githubusercontent.com/miptgirl/kinopoisk_data/master/kp_all_movies.csv)). Our dataset consists of `positive` and `negative` class, or only reviews with rating `> 7` and `< 4` accordingly. `Neutral` class is not represented in dataset.
 
@@ -79,11 +79,11 @@ Last we need is to create map from this distribution to initial film rating dist
 
 ## Testing Rating model
 
-For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `review_ratings.csv`. Plot below shows predictions mapped to rating in two ways: simple multiplying by 10, or `rescaling` and using function described before, or `mapping`. Red line shows ground truth labels. As you can see, simple rescaling works worse.
+For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `review_ratings.csv`. Plot below shows predictions mapped to rating in two ways: simple multiplying by `9` and adding `1`, or `rescaling` and using function described before, or `mapping`. Red line shows ground truth labels. As you can see, simple rescaling works worse.
 
 |Method                       |MSE|
 |-----------------------------|---|
-|Rescaling (multiplying by 10)| 5.443|
+|Rescaling probability to 1 - 10 range| 5.443|
 |Mapping                      | 4.423|
 
 ![Rating test](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/dist_compare.png)
