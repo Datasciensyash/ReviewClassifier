@@ -54,14 +54,14 @@ For hyperparameter optimization was used W&B Sweeps platform. All **results**, *
 Best hyperparameters was:
 ```yaml
 Vectorizer:
-	- min_df: 1
-	- max_df: 0.9518
+  - min_df: 1
+  - max_df: 0.9518
 LogisticRegression:
   - max_iter: 106
-	- solver: sag
+  - solver: sag
 Strategy:
-	- vectorizer_fit_unsup: False #Do we need to fitting vectorizer with unsupervised data
-	- pseudolabel_unsup: True #Do we need to preform pseudolabeling.
+  - vectorizer_fit_unsup: False #Do we need to fitting vectorizer with unsupervised data
+  - pseudolabel_unsup: True #Do we need to preform pseudolabeling.
 ```
 
 ![Hyperparameters optimization](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/wandb.png)
