@@ -7,7 +7,7 @@ Model and api to classifiy film reviews on 10 point scale.
 ## Dataset
 
 #### Dataset source
-For training and evaluating model was chosen [Large Movie Review Dataset](https://ai.stanford.edu/~amaas/data/sentiment/), gathered at [IMDB](https://www.imdb.com/). Dataset contains `50,000` user film reviews with positive or negative label. `25,000` in the test and training part. All two classes are completely balanced, `12,500` per positive and negative class.
+For training and evaluating model was chosen [Large Movie Review Dataset](https://ai.stanford.edu/~amaas/data/sentiment/), gathered at [IMDB](https://www.imdb.com/). Dataset contains `50,000` user film reviews with positive or negative label. `25,000` in the test and training part. Both classes classes are completely balanced, `12,500` per positive and negative class.
 
 Here a small example of dataset samples:
 
@@ -23,7 +23,7 @@ Here a small example of dataset samples:
 
 
 #### Data preparation
-Dataset was originally stored in `50,000` `.txt` files, but during the data preparation process was created pandas `DataFrame`'s with train and test samples. Also, i have performed the deletion of not-unique samples from dataset, which reduced size of train and test sets to `24,904` and `24,801` respectively. This files stored in `./dataset/` directory (in `.pkl` format).
+Dataset was originally stored in `50,000` `.txt` files, but during the data preparation process were created pandas `DataFrame`s with train and test samples. Also, i've dropped non-unique samples from dataset, which reduced size of train and test sets to `24,904` and `24,801` respectively. These files are stored in `./dataset/` directory (in `.pkl` format).
 
 ---
 
@@ -37,7 +37,7 @@ Model was composed of two components:
 
 #### Training Process
 
-Baseline was to simple combine `sklearn`'s `TfidfVectorizer` and `sklearn`'s `LogisticRegression` with following hyperparameters:
+Baseline was to simply combine `sklearn`'s `TfidfVectorizer` and `sklearn`'s `LogisticRegression` with following hyperparameters:
 
 ```yaml
 Vectorizer:
@@ -47,11 +47,11 @@ LogisticRegression:
   - solver: lbfgs
   - max_iter: 100
 ```
-That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline hasn't used unsupervised data to train, which in theory can get better metrics value. Also, baseline hasn't used strategy of re-training on pseudo-labeled data.
+That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline didn't use unsupervised data to train, which in theory can give better metrics values. Also, baseline hasn't used strategy of re-training on pseudo-labeled data.
 
-For hyperparameter optimization was used W&B Sweeps platform. All **results**, **logs** and **charts** public avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash). Also, this information is stored at `./csv/Hyperoptinfo.csv` file. Training with best hyperparameters gain `0.89` accuracy and `0.28` LogLoss on Test data.
+For hyperparameter optimization was used W&B Sweeps platform. All **results**, **logs** and **charts** are publicly avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash). Also, this information is stored at `./csv/Hyperoptinfo.csv` file. Training with best hyperparameters gain `0.89` accuracy and `0.28` LogLoss on Test data.
 
-Best hyperparameters was:
+Best hyperparameters were:
 ```yaml
 Vectorizer:
   - min_df: 1
