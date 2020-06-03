@@ -132,11 +132,13 @@ Fields in response:
 
 ---
 
+
 ## Pretrained models
 
 Pretrained models are stored in `./models/` directory.
 - `model.pkl`: Model of `LogisticRegression`
 - `vectorizer.pkl`: Model of `TfidfVectorizer`.
 - `rating.pkl`: Model of `DistributionMap` (`./modules/dist_map.py`)
+
 
 ---
