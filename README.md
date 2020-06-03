@@ -51,6 +51,19 @@ That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline
 
 For hyperparameter optimization was used W&B Sweeps platform. All **results**, **logs** and **charts** public avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash). Also, this information is stored at `./csv/Hyperoptinfo.csv` file. Training with best hyperparameters gain `0.89` accuracy and `0.28` LogLoss on Test data.
 
+Best hyperparameters was:
+```yaml
+Vectorizer:
+  - min_df: 1
+  - max_df: 0.9518
+LogisticRegression:
+  - max_iter: 106
+  - solver: sag
+Strategy:
+  - vectorizer_fit_unsup: False #Do we need to fitting vectorizer with unsupervised data
+  - pseudolabel_unsup: True #Do we need to preform pseudolabeling.
+```
+
 ![Hyperparameters optimization](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/wandb.png)
 
 ---
