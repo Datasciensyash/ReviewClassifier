@@ -1,13 +1,16 @@
 # ReviewClassifier
 
-Model and api to classifiy film reviews on 10 point scale.
+A model and api to classify movie reviews as negative or positive and then map classification results to 10-point scale.
 
 ---
 
 ## Dataset
 
 #### Dataset source
-For training and evaluating model was chosen [Large Movie Review Dataset](https://ai.stanford.edu/~amaas/data/sentiment/), gathered at [IMDB](https://www.imdb.com/). Dataset contains `50,000` user film reviews with positive or negative label. `25,000` in the test and training part. Both classes classes are completely balanced, `12,500` per positive and negative class.
+Model training and evaluation were carried out on [Large Movie Review Dataset](https://ai.stanford.edu/~amaas/data/sentiment/), gathered from [IMDB](https://www.imdb.com/).  
+Dataset contains `50,000` movie reviews with labels (positive or negative).
+Dataset is balanced: 50% of labels are positive and 50% of labels are negative.
+Movie reviews were divided up into three subsets - train, val, test - with following ratios: 40% train, 10% val, 50% test stratified by label.
 
 Here a small example of dataset samples:
 
@@ -23,7 +26,8 @@ Here a small example of dataset samples:
 
 
 #### Data preparation
-Dataset was originally stored in `50,000` `.txt` files, but during the data preparation process were created pandas `DataFrame`s with train and test samples. Also, i've dropped non-unique samples from dataset, which reduced size of train and test sets to `24,904` and `24,801` respectively. These files are stored in `./dataset/` directory (in `.pkl` format).
+Dataset was originally stored in `50,000` `.txt` files.
+They were merged and converted to `pandas.DataFrame`s with train and test samples. Also, I've dropped non-unique samples from dataset, which reduced the size of train and test sets to `24,904` and `24,801` respectively. These files are stored in `./dataset/` directory (in `.pkl` format).
 
 ---
 
@@ -31,9 +35,9 @@ Dataset was originally stored in `50,000` `.txt` files, but during the data prep
 
 #### Model
 
-Model was composed of two components:
+Model consists of two components:
 - `TF-IDF vectorizer` for text vectorization
-- `Logistic Regression` for vector classification
+- `Logistic Regression` for vector-based classification
 
 #### Training Process
 
@@ -47,11 +51,14 @@ LogisticRegression:
   - solver: lbfgs
   - max_iter: 100
 ```
-That achieved about `0.89` accuracy and `0.3` LogLoss on Test data. But Baseline didn't use unsupervised data to train, which in theory can give better metrics values. Also, baseline hasn't used strategy of re-training on pseudo-labeled data.
+That gave me about `0.89` accuracy and `0.3` LogLoss on test data. 
+I decided to try hyperparameter optimization with the following tricks:
+- usage of unsupervised data (sometimes it gives better metrics values)
+- usage of re-training on pseudo-labeled data.
 
-For hyperparameter optimization was used W&B Sweeps platform. All **results**, **logs** and **charts** are publicly avaliable at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash). Also, this information is stored at `./csv/Hyperoptinfo.csv` file. Training with best hyperparameters gain `0.89` accuracy and `0.28` LogLoss on Test data.
+For hyperparameter optimization I've chosen W&B Sweeps platform. All **results**, **logs** and **charts** are publicly available at [project page on W&B](https://app.wandb.ai/datasciensyash/review_classifier/sweeps/u3l9ojto/overview?workspace=user-datasciensyash). Also, this information is stored at `./csv/Hyperoptinfo.csv` file. Training with best hyperparameters has given me `0.89` accuracy and `0.28` LogLoss on test data.
 
-Best hyperparameters were:
+Best hyperparameters have been:
 ```yaml
 Vectorizer:
   - min_df: 1
@@ -60,31 +67,36 @@ LogisticRegression:
   - max_iter: 106
   - solver: sag
 Strategy:
-  - vectorizer_fit_unsup: False #Do we need to fitting vectorizer with unsupervised data
-  - pseudolabel_unsup: True #Do we need to preform pseudolabeling.
+  - vectorizer_fit_unsup: False #Do we need to fit vectorizer with unsupervised data
+  - pseudolabel_unsup: True #Do we need to perform pseudo-labeling.
 ```
 
 ![Hyperparameters optimization](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/wandb.png)
+
+This big chart represents all used hyperparameter sets with their validation scores (on the left).
 
 ---
 
 ## Rating model
 
-In this project the main goal was not to classify `positive` and `negative` classes but to **map** classification **predictions to film rating**. A naive way to do that is multiply the probability of `positive` class by `9` and add `1`. But it doesn't work correctly because of the distribution of predictions. Let's get closer look on it.
+The main goal of the project wasn't `positive`/`negative` classification, I wanted to **map** classification **predictions to movie rating**. A naive way to do that is to multiply the probability of `positive` class by `9` and add `1`. But it doesn't work correctly because of the distribution of predictions (see below). 
 
-Histogram below represents distribution of film ratings at imdb (according to [this dataset](https://raw.githubusercontent.com/miptgirl/kinopoisk_data/master/kp_all_movies.csv)). Our dataset consists of `positive` and `negative` class, or only reviews with rating `> 7` and `< 4` accordingly. `Neutral` class is not represented in dataset.
+Histogram below represents the distribution of film ratings at imdb (ratings are from [this dataset](https://raw.githubusercontent.com/miptgirl/kinopoisk_data/master/kp_all_movies.csv)). 
+My dataset consists of `positive` and `negative` reviews, or only reviews with rating `> 7` and `< 4` accordingly. `Neutral` class is not present in my dataset.
 
 ![D-1](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/distribution-1.png)
 
-When we mapping our `positive`-class probability to the rating we want to create look-alike distribution in production. And re-scaling our probability to 1-10 range is not the way to get it. Below is histogram with distribution of model predictions. Colors matching the distribution of film ratings to the distribution of predictions.
+When we map our `positive`-class probability to the rating we want to get similar distribution in production. But re-scaling probability to `1-10` range produces something undeniably different. As we can see at histogram below, our model assigns either probability values too close to `1` or too close to `0`. The colors here are for comparison only. For example, the share of the negative class in the dataset described above is approximately `10%`. Red color shows `10%` of the distribution of predictions. And so on.
+
+Histogram of model predictions distribution:
 
 ![D-2](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/distribution-2.png)
 
-After rescaling this distribution in parts we get distribution showed below.
+Histogram of model predictions distribution after rescaling:
 
 ![D-3](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/distribution-3.png)
 
-Last we need is to create map from this distribution to initial film rating distribution from imdb, e.g. by modified  `Inverse Transform Sampling` method (Implementation is stored here: `./modules/dist_map.py`), using small amout of bins for smoother look. `x` here represents predictions axis (multiplied by 10), and `y` - rating axis. As we can see, that is exactly what we looking for: very low probability to get too high and too low ratings (like in real distribution!)
+So we need to create a mapping from this distribution to initial movie rating distribution from imdb, e.g. by modified  `Inverse Transform Sampling` method (Implementation is in `./modules/dist_map.py`), using a small number of bins for a smoother plot. `x` here represents rescaled predictions axis, and `y` - rating axis. As we can see, that is exactly what we were looking for: this function reduces the likelihood of assigning an extremely low or extremely high rating to the film. 
 
 ![Map](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/map.png)
 
@@ -92,9 +104,13 @@ Last we need is to create map from this distribution to initial film rating dist
 
 ## Testing Rating model
 
-For testing rating model i have scraped `700` reviews from imdb with their scores. This small dataset is stored in `./csv/review_ratings.csv`. Plot below shows predictions mapped to rating in two ways: simple multiplying by `9` and adding `1`, or `rescaling` and using function described before, or `mapping`. Red line shows ground truth labels. As you can see, simple rescaling works worse.
+To test the rating model I have scraped `700` reviews from imdb with their scores. This small dataset is located in `./csv/review_ratings.csv`. Plot below shows predictions two mapping types: simple `rescaling`(`model_prediction * 9 + 1`) and `rescaling`(`model_prediction * 9 + 1`) + `mapping`(`./modules/dist_map.py`) described above.  
 
-You can see dataset gathering and evaluating this metrics in `./Movie Rating Test.ipynb`. 
+Red line shows ground truth labels. 
+
+As you can see, simple rescaling works worse.
+
+You can see code for gathering dataset and metric evaluation process in `./Movie Rating Test.ipynb`.
 
 |Method   |MSE_1 |MSE_2|MSE_3|MSE_4|MSE_5|MSE_6|MSE_7|MSE_8|MSE_9|MSE_10|Mean  |
 |---------|------|-----|-----|-----|-----|-----|-----|-----|-----|------|------|
@@ -104,15 +120,15 @@ You can see dataset gathering and evaluating this metrics in `./Movie Rating Tes
 
 ![Rating test](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/dist_compare.png)
 
-As you can see, these **data** are well balanced, which does **not correspond to real data**, therefore, the `MSE` of the mapping model is overvalued, as well as rescaling method underestimated.
+As you can see, this **dataset** (which contains `700` reviews) is well balanced, which does **not correspond to real data**, therefore, `MSE` of the mapping model has been overestimated, as well as rescaling method has been underestimated.
 
 ---
 
 ## Deploy and API
 
-Model has been [deployed](https://filmreviewclassifier.herokuapp.com/model_handler/?input=None) on Django at heroku. For closer look you can see `./api/` folder. 
+Model has been [deployed](https://filmreviewclassifier.herokuapp.com/model_handler/?input=None) on Django at heroku. For details, see `./api/` folder. 
 
-Example of use:
+Usage example:
 ```python
 import requests
 url = 'https://filmreviewclassifier.herokuapp.com/model_handler/'
@@ -121,14 +137,14 @@ requests.get(url, {'input': review})
 
 >> {"Predictions": [{"Class": -1, "Description": "Negative", "Rating": 1.3, "Rating_rounded": 1}]}
 ```
-Fields in response:
-- `Class`: Class of review.
-  - `-1` is negative.
-  - `0` is neutral.
-  - `1` is positive.
-- `Description`: description of class.
-- `Rating`: Rating of film based on rating model.
-- `Rating_rounded`: `Rating`, but rounded.
+Response fields:
+- `Class`: Review class (откуда - из модели или с imdb?)
+  - `-1` stands for negative
+  - `0`  stands for neutral
+  - `1`  stands for positive
+- `Description`: class description
+- `Rating`: predicted rating.
+- `Rating_rounded`: rounded predicted rating
 
 ---
 
@@ -136,9 +152,9 @@ Fields in response:
 ## Pretrained models
 
 Pretrained models are stored in `./models/` directory.
-- `model.pkl`: Model of `LogisticRegression`
-- `vectorizer.pkl`: Model of `TfidfVectorizer`.
-- `rating.pkl`: Model of `DistributionMap` (`./modules/dist_map.py`)
+- `model.pkl`: `LogisticRegression` model
+- `vectorizer.pkl`: `TfidfVectorizer` model
+- `rating.pkl`: `DistributionMap` (`./modules/dist_map.py`) model
 
 
 ---
