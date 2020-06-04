@@ -100,7 +100,9 @@ So we need to create a mapping from this distribution to initial movie rating di
 
 ![Map](https://github.com/Datasciensyash/ReviewClassifier/raw/master/images/map.png)
 
+
 ---
+
 
 ## Testing Rating model
 
